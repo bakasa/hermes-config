@@ -30,14 +30,8 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 ```
 ~/.hermes/research/vault/
 ├── findings/          # Individual observed signals (one file per finding)
-│   ├── 2026-06-01-001.md
-│   ├── 2026-06-01-002.md
-│   └── ...
 ├── claims/            # Candidate beliefs extracted from findings
-│   ├── claim-001.md   # Status: weak | moderate | strong | verified | stale
-│   └── ...
 ├── sources/           # Citation trail (URL, type, excerpt, timestamp)
-│   └── ...
 ├── dossiers/          # Living topic files
 │   ├── ai-agents.md
 │   ├── frontier-ai.md
@@ -60,9 +54,7 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 - **Source**: [URL]
 - **Type**: news | paper | github | x-post | feed | search
 - **Excerpt**: [key quote or summary, 1-3 sentences]
-- **Raw**: [full text if short, or first 500 chars]
 - **Tags**: [comma-separated topics]
-- **Related claims**: [claim-IDs if any]
 - **Status**: new | processed | promoted-to-claim | stale
 ```
 
@@ -73,8 +65,6 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 - **Status**: weak | moderate | strong | verified | stale
 - **Created**: YYYY-MM-DD
 - **Last evidence**: YYYY-MM-DD
-- **Findings**: [finding-IDs that support this]
-- **Counter-findings**: [finding-IDs that contradict]
 - **Confidence**: [low | medium | high]
 - **Summary**: [2-3 sentence summary of the evidence]
 ```
@@ -85,7 +75,6 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 # Dossier: [topic]
 - **Last updated**: YYYY-MM-DD
 - **Signal count**: N
-- **Active claims**: [claim-IDs]
 - **Summary**: [current state of knowledge on this topic]
 - **Open questions**: [what we don't know yet]
 - **Stale beliefs**: [what we used to think but no longer hold]
@@ -106,7 +95,7 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 
 | Lane | Destination | What goes there |
 |---|---|---|
-| to-subconscious | Subconscious agent | Weird patterns, unexpected connections, "what if" signals |
+| to-subconscious | Subconscious agent | Weird patterns, unexpected connections |
 | to-main | Main agent (OWL) | Strategic signals, market shifts, major announcements |
 | to-coder | Coder agent | Build-ready ideas, new tools/libraries, API changes |
 | to-qa | QA agent | Quality concerns, bug reports, broken things |
@@ -123,7 +112,6 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 8. Polymarket (AI markets)
 9. TechCrunch AI
 10. The Verge AI
-11-18. [Expand as needed]
 
 ## Cron Schedule
 
@@ -139,3 +127,10 @@ The vault has space for each stage. Nothing gets flattened into confident prose.
 - Which sources and topics keep being useful?
 - Which signals belong to which agent?
 - Which old beliefs are now stale?
+
+## References
+
+- `references/feed-list.md` — curated AI blogs and news sources
+- `references/search-queries.md` — arXiv, web, Polymarket query templates
+- `references/vault-architecture.md` — design doc: findings vs claims vs knowledge
+- `references/vault-tools.md` — operational modes, lifecycle, routing rules, health checks
