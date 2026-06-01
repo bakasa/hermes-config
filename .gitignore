@@ -1,0 +1,39 @@
+# hermes-config
+# .gitignore
+
+# Secrets and credentials
+*.credentials.json
+auth.json
+.git-credentials
+
+# Runtime state
+state.db
+state.db-shm
+state.db-wal
+*.lock
+
+# Cache
+cache/
+image_cache/
+audio_cache/
+models_dev_cache.json
+
+# Logs
+logs/
+
+# Sandboxes
+sandboxes/
+
+# Profiles (contain secrets)
+profiles/
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/

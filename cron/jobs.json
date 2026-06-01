@@ -1,0 +1,91 @@
+{
+  "jobs": [
+    {
+      "id": "3a013907a9c7",
+      "name": "paper-trading-monitor",
+      "prompt": "Check the paper trading bot status and report. Run: cat /data/workspace/perp-trading-bot/testnet_logs/paper_status.json 2>/dev/null. If the file exists, extract and report: cycle number, portfolio value, total PnL, number of open positions, number of total trades, and details of each open position (coin, side, entry, mark, unrealized PnL). If the bot process is not running (check with pgrep -f paper_trading_bot.py), report that the bot has stopped and check for a final report at /data/workspace/perp-trading-bot/testnet_logs/paper_final_report.json. Keep the report concise.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 */6 * * *",
+        "display": "0 */6 * * *"
+      },
+      "schedule_display": "0 */6 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-01T04:15:31.443010+00:00",
+      "next_run_at": "2026-06-02T00:00:00+00:00",
+      "last_run_at": "2026-06-01T18:00:40.236116+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "slack",
+        "chat_id": "D0B552FTE95",
+        "chat_name": "D0B552FTE95",
+        "thread_id": "1780254798.159169"
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "profile": null
+    },
+    {
+      "id": "c7bef0466cff",
+      "name": "paper-trading-hourly-report",
+      "prompt": "You are the Lead Engineer monitoring the paper trading bot. Generate an hourly status report.\n\n## Step 1: Read the paper trading bot status\nRun: cat /data/workspace/perp-trading-bot/testnet_logs/paper_status.json\n\n## Step 2: Read the recent log tail\nRun: tail -30 /data/workspace/perp-trading-bot/testnet_logs/paper_bot.log\n\n## Step 3: Check if the bot process is alive\nRun: ps aux | grep paper_trading_bot | grep -v grep\n\n## Step 4: Analyze Aster DEX data (new multi-exchange support)\nRun: cd /data/workspace/perp-trading-bot && .venv/bin/python -c \"\nimport sys, json\nsys.path.insert(0, 'src')\nfrom aster_client import AsterClient\nc = AsterClient()\nrates = c.get_funding_rates_normalized()\nsorted_rates = sorted(rates, key=lambda r: abs(float(r.get('funding_rate', 0))), reverse=True)\nprint('Top 5 Aster markets by |funding rate|:')\nfor r in sorted_rates[:5]:\n    print(f'  {r[\\\"coin\\\"]:10s} funding={r[\\\"funding_rate\\\"]:>12s} mark={r[\\\"mark_price\\\"]:>12s}')\nprint(f'Total Aster markets: {len(rates)}')\n\"\n\n## Step 5: Generate the report\n\nFormat your response as:\n\n\ud83d\udcca **Paper Trading Bot \u2014 Hourly Report**\n\u23f0 [timestamp]\n\n**Bot Status:** \u2705 Running / \u274c Stopped (PID, uptime)\n**Cycle:** [N] | **Elapsed:** [time] | **Remaining:** [time]\n\n\ud83d\udcb0 **Portfolio**\n- Value: $[X] | P&L: $[X] ([X]%)\n- Cash: $[X] | Open Positions: [N]\n\n\ud83d\udcc8 **Active Positions** (if any)\n- [COIN] [SIDE] size=[X] entry=$[X] mark=$[X] PnL=$[X]\n...\n\n\ud83c\udfaf **Strategy Performance**\n- Total Trades: [N] | Win Rate: [X]%\n- Best Trade: [COIN] +$[X] | Worst Trade: [COIN] -$[X]\n\n\ud83d\udd04 **Current Opportunities** (Top funding rates)\n- [COIN] funding=[X] \u2192 [recommendation]\n\n\ud83d\udca1 **Improvement Suggestions**\n- [Specific actionable suggestions based on the data]\n\nKeep it concise but informative. Focus on what changed since last report.",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "no_agent": false,
+      "context_from": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 * * * *",
+        "display": "0 * * * *"
+      },
+      "schedule_display": "0 * * * *",
+      "repeat": {
+        "times": null,
+        "completed": 5
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-06-01T13:27:48.671173+00:00",
+      "next_run_at": "2026-06-01T19:00:00+00:00",
+      "last_run_at": "2026-06-01T18:01:12.508822+00:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "origin",
+      "origin": {
+        "platform": "slack",
+        "chat_id": "C0B7GNPRKTK",
+        "chat_name": "C0B7GNPRKTK",
+        "thread_id": "1780316840.931729"
+      },
+      "enabled_toolsets": null,
+      "workdir": null,
+      "profile": null
+    }
+  ],
+  "updated_at": "2026-06-01T18:01:12.509230+00:00"
+}
